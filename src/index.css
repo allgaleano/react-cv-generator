@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+@theme {
+  --text-sm: 10px;
+  --text-base: 12px;
+  --text-lg: 14px;
+  --text-xl: 18px;
+  --text-2xl: 24px;
+  --text-3xl: 30px;
+}
+
+@layer base {
+  h1 {
+    @apply text-xl font-semibold;
+  }
+  h2 {
+    @apply text-base font-semibold;
+  }
+  h3 {
+    @apply text-base font-semibold;
+  }
+  p {
+    @apply text-base text-justify;
+  }
+  a {
+    @apply hover:underline;
+  }
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+}
