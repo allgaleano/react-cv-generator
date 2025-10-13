@@ -1,73 +1,210 @@
-# React + TypeScript + Vite
+# CV Generator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, ATS-friendly CV/Resume generator built with React and @react-pdf/renderer. Create professional resumes with real-time PDF preview and multi-language support.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Real-time PDF Preview** - See your CV update instantly as you edit
+- **Multi-language Support** - Switch between English and Spanish versions
+- **ATS-Optimized** - Designed for maximum compatibility with Applicant Tracking Systems
+- **Custom Fonts** - Uses Open Sans for a modern, professional look
+- **PDF Metadata** - Includes proper metadata for better discoverability
+- **Clean Structure** - Simple, single-column layout that ATS systems can parse easily
+- **Downloadable** - Export your CV as a high-quality PDF
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **React** - UI framework
+- **TypeScript** - Type safety
+- **@react-pdf/renderer** - PDF generation
+- **Tailwind CSS** - Styling
+- **Vite** - Build tool (assumed)
 
-## Expanding the ESLint configuration
+## Installation
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+```bash
+# Clone the repository
+git clone <your-repo-url>
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+# Navigate to project directory
+cd cv-generator
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+# Install dependencies
+npm install
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# Start development server
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Project Structure
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
 ```
+├── src/
+│   ├── data/
+│   │   ├── cv-en.json       # English CV data
+│   │   └── cv-es.json       # Spanish CV data
+│   ├── components/
+│   │   ├── App.tsx          # Main application component
+│   │   ├── menu.tsx         # Language selector and download options
+│   │   ├── section.tsx      # Reusable section component
+│   │   ├── bullet-list.tsx  # Bullet point list component
+│   │   └── pdf-document.tsx # PDF generation component
+│   └── types.ts             # TypeScript type definitions
+├── public/
+│   └── fonts/
+│       ├── OpenSans-Regular.ttf
+│       ├── OpenSans-Italic.ttf
+│       └── OpenSans-SemiBold.ttf
+└── package.json
+```
+
+## CV Data Structure
+
+The CV data is stored in JSON format with the following structure:
+
+```json
+{
+  "personal": {
+    "name": "Your Name",
+    "email": "email@example.com",
+    "phone": "+1234567890",
+    "linkedin": "linkedin.com/in/yourprofile",
+    "linkedinURL": "https://linkedin.com/in/yourprofile",
+    "github": "github.com/yourusername",
+    "githubURL": "https://github.com/yourusername",
+    "website": "yourwebsite.com",
+    "websiteURL": "https://yourwebsite.com"
+  },
+  "experience": {
+    "title": "Professional Experience",
+    "items": [
+      {
+        "company": "Company Name",
+        "position": "Job Title",
+        "location": "City, Country",
+        "startDate": "MM/YYYY",
+        "endDate": "MM/YYYY",
+        "bullets": [
+          "Achievement or responsibility 1",
+          "Achievement or responsibility 2"
+        ]
+      }
+    ]
+  },
+  "projects": {
+    "title": "Projects",
+    "items": [
+      {
+        "name": "Project Name",
+        "startDate": "MM/YYYY",
+        "endDate": "MM/YYYY",
+        "bullets": [
+          "Project description and achievements"
+        ]
+      }
+    ]
+  },
+  "education": {
+    "title": "Education",
+    "items": [
+      {
+        "degree": "Degree Name",
+        "institution": "University Name",
+        "startDate": "MM/YYYY",
+        "endDate": "MM/YYYY",
+        "bullets": [
+          "Relevant coursework or achievements"
+        ]
+      }
+    ]
+  },
+  "skills": {
+    "title": "Technical Skills",
+    "items": [
+      "Skill 1",
+      "Skill 2",
+      "Skill 3"
+    ]
+  }
+}
+```
+
+## Customization
+
+### Adding Custom Fonts
+
+1. Place your `.ttf` font files in `public/fonts/`
+2. Register them in `pdf-document.tsx`:
+
+```typescript
+Font.register({
+  family: "Your Font",
+  fonts: [
+    { src: "/fonts/YourFont-Regular.ttf", fontWeight: 400 },
+    { src: "/fonts/YourFont-Bold.ttf", fontWeight: 600 }
+  ]
+});
+```
+
+3. Update the `fontFamily` in styles:
+
+```typescript
+const styles = StyleSheet.create({
+  page: {
+    fontFamily: "Your Font",
+    // ... other styles
+  }
+});
+```
+
+### Modifying PDF Layout
+
+Edit `pdf-document.tsx` to adjust:
+- Font sizes
+- Spacing and margins
+- Section order
+- Colors and borders
+
+### Adding More Languages
+
+1. Create a new JSON file in `src/data/` (e.g., `cv-fr.json`)
+2. Update the language selector in `menu.tsx`
+3. Add the import in `App.tsx`
+
+## ATS Optimization Tips
+
+This CV generator follows ATS best practices:
+
+- Single-column layout
+- Standard section headings
+- Simple, clean formatting
+- No images or graphics
+- Standard fonts (Open Sans/Helvetica)
+- Real, selectable text (not images)
+- Proper use of bullet points
+- Clear date formats
+
+## PDF Metadata
+
+The generated PDF includes metadata for better organization:
+- Title
+- Author
+- Subject
+- Keywords
+- Creator
+- Producer
+
+This helps with document management systems and search indexing.
+
+## Building for Production
+
+```bash
+npm run build
+```
+
+The build artifacts will be stored in the `dist/` directory.
+
+## Acknowledgments
+
+- [@react-pdf/renderer](https://react-pdf.org/) - PDF generation library
+- [Open Sans](https://fonts.google.com/specimen/Open+Sans) - Font by Steve Matteson
