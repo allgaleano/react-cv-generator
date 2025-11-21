@@ -1,0 +1,134 @@
+{
+  "$schema": "./schema.json",
+  "personal": {
+    "name": "Alberto Galeano Díaz",
+    "contactData": [
+      "galeano.diaz.alberto@gmail.com",
+      "+34 603657082",
+      "Madrid, Spain"
+    ],
+    "urls": [
+      ["linkedin.com/in/alberto-galeano-diaz/", "https://www.linkedin.com/in/alberto-galeano-diaz/"],
+      ["github.com/allgaleano", "https://github.com/allgaleano"],
+      ["albertogaleano.com", "https://albertogaleano.com"]
+    ]
+  },
+  "sections": [
+    {
+      "id": "experience",
+      "type": "bullets",
+      "title": "Experience",
+      "data": [
+        {
+          "title": "Accenture",
+          "subtitle": "Software Engineer Intern",
+          "location": "Madrid, Spain",
+          "startDate": "Feb 2025",
+          "endDate": "May 2025",
+          "list": [
+            "Accelerated backend development by 5x by rapidly delivering RESTful endpoints using Java Spring Boot within tight deadlines after project cancellation in an Agile/SCRUM environment.",
+            "Eliminated technical debt and improved code quality by 60% by implementing TDD practices, writing 200+ unit tests, and resolving 150+ SonarQube code smells across the codebase, maintaining zero technical debt throughout development cycle.",
+            "Developed complex functional requirements by studying project documentation and maintaining clear communication with functional teams and clients, achieving desired behavior and meeting 100% of deadlines."
+          ]
+        },
+        {
+          "title": "Motion&Balance",
+          "subtitle": "Full-Stack Developer",
+          "location": "Madrid, Spain",
+          "startDate": "Oct 2022",
+          "endDate": "Apr 2024",
+          "list": [
+            "Reduced order fulfillment cycle time by 70% by architecting and deploying a custom end-to-end CRM and product configurator application using Java Spring Boot backend and React frontend, automating quote generation, order processing, and manufacturing workflows for 500+ monthly transactions.",
+            "Cut infrastructure costs by 40% and improved system scalability by migrating web applications and domain servers to AWS cloud infrastructure.",
+            "Increased lead generation by 150% by redesigning company website UI/UX and implementing SEO best practices using modern JavaScript frameworks (React + Vite, Astro, Next.js), improving page load speed by 60% and search engine rankings for 20+ key terms."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "projects",
+      "type": "bullets",
+      "title": "Projects",
+      "data": [
+        {
+          "title": "MatchPoint Web Application",
+          "startDate": "Sep 2024",
+          "endDate": "Dec 2024",
+          "list": [
+            "Automated tennis tournament management by building full-stack application with Java Spring Boot and React/Next.js, implementing automated player pairing algorithms and real-time statistics tracking for players across multiple tournaments."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "education",
+      "type": "bullets",
+      "title": "Education",
+      "data": [
+        {
+          "title": "Bachelor's Degree in Computer Engineering",
+          "subtitle": "Polytechnic University of Madrid",
+          "location": "Madrid",
+          "startDate": "Sep 2021",
+          "endDate": "Jun 2025",
+          "list": [
+            "Graduated with highest honors for my final degree project."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "skills",
+      "type": "joinedList",
+      "title": "Skills",
+      "data": [
+        {
+          "title": "",
+          "list": [
+            "Java",
+            "Spring",
+            "Spring Boot",
+            "JUnit",
+            "Mockito",
+            "Maven",
+            "Tomcat",
+            "Hibernate",
+            "PostgreSQL",
+            "MySQL",
+            "Oracle SQL",
+            "Redis",
+            "MongoDB",
+            "SQL",
+            "NoSQL",
+            "Microservices",
+            "REST APIs",
+            "AWS",
+            "Cloud",
+            "Linux",
+            "Docker",
+            "CI/CD",
+            "Jenkins",
+            "Jira",
+            "Git",
+            "GitLab",
+            "GitHub",
+            "Bitbucket",
+            "JavaScript",
+            "TypeScript",
+            "React",
+            "Next.js",
+            "Vite",
+            "Astro",
+            "Node.js",
+            "TanStack",
+            "HTML/CSS",
+            "TDD",
+            "DDD",
+            "Agile Methodologies",
+            "SCRUM"
+          ]
+        }
+      ]
+    }
+  ]
+}
