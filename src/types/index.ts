@@ -6,7 +6,7 @@ export interface CVData {
 export interface Personal {
   name: string;
   contactData: string[];
-  urls: [string, string][];
+  urls: string[][];
 }
 
 export interface SectionItem {
@@ -19,11 +19,9 @@ export interface SectionItem {
   text?: string;
 }
 
-export type SectionType = "bullets" | "text" | "joinedList";
-
 export interface Section {
   id: string;
-  type: SectionType;
+  type: string;
   title: string;
   data: SectionItem[];
 }

@@ -1,7 +1,16 @@
+interface MenuProps {
+  language: string,
+  setLanguage: (lang: "en" | "es") => void;
+  setIsEditorOpen: (v: boolean) => void;
+  handleDownloadJSON: () => void;
+}
 
 export const Menu = ({
-  language, setLanguage
-}: { language: string; setLanguage: (lang: string) => void }) => {
+  language, 
+  setLanguage,
+  setIsEditorOpen,
+  handleDownloadJSON
+}: MenuProps) => {
 
   return (
     <div className="flex justify-center gap-4 py-1 bg-[#3c3c3c]">
@@ -25,6 +34,20 @@ export const Menu = ({
       >
         ES
       </button>
+      <div className="flex gap-2 py-1">
+        <button
+          onClick={() => setIsEditorOpen(true)}
+          className="px-3 py-1 text-sm text-white bg-[#303030] hover:bg-[#4d4d4d] rounded"
+        >
+          ✏️ Edit JSON
+        </button>
+        <button
+          onClick={handleDownloadJSON}
+          className="px-3 py-1 text-sm text-white bg-[#303030] hover:bg-[#4d4d4d] rounded"
+        >
+          💾 Download JSON
+        </button>
+      </div>
     </div>
   );
 };
