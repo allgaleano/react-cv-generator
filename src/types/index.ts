@@ -1,4 +1,5 @@
 export interface CVData {
+  $schema: string;
   personal: Personal;
   sections: Section[];
 }

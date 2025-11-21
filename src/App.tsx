@@ -1,17 +1,40 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import cvEnglish from "./data/en.json";
 import cvSpanish from "./data/es.json";
-import { Menu } from "./components/menu";
+import cvSchema from "./data/schema.json";
 import { PDFViewer } from "@react-pdf/renderer";
 import PDFDocument from "./pdf-document";
+import { JsonEditor } from "@/components/json-editor";
 import type { CVData } from "./types";
-import { JsonEditorDialog } from "./components/json-editor-dialog";
+
+const STORAGE_KEY = "cv-data";
 
 function App() {
-  const [language, setLanguage] = useState<"en"|"es">("en");
-  const [isEditorOpen, setIsEditorOpen] = useState(false);
+  const [language, setLanguage] = useState<"en" | "es">("en");
+  
+  // State to hold the CV data
   const [cvDataEn, setCvDataEn] = useState<CVData>(cvEnglish);
   const [cvDataEs, setCvDataEs] = useState<CVData>(cvSpanish);
+  
+  // Load from localStorage on mount
+  useEffect(() => {
+    const load = (lang: "en" | "es", def: CVData, setter: (d: CVData) => void) => {
+      try {
+        const raw = localStorage.getItem(`${STORAGE_KEY}-${lang}`);
+        if (raw) {
+          setter(JSON.parse(raw));
+          console.log("Loaded", lang);
+        } else {
+          setter(def);
+        }
+      } catch {
+        setter(def);
+      }
+    };
+
+    load("en", cvEnglish, setCvDataEn);
+    load("es", cvSpanish, setCvDataEs);
+  }, []);
 
   const cvData = language === "en" ? cvDataEn : cvDataEs;
 
@@ -22,7 +45,6 @@ function App() {
       setCvDataEs(data);
     }
     console.log(`Saved ${lang} CV:`, data);
-    // TODO: Save to localStorage
   };
 
   const handleDownloadJSON = () => {
@@ -36,25 +58,64 @@ function App() {
     URL.revokeObjectURL(url);
   };
 
+  const handleResetAll = () => {
+    if (window.confirm("Reset ALL data to original? This will clear localStorage for both languages.")) {
+      localStorage.removeItem(`${STORAGE_KEY}-en`);
+      localStorage.removeItem(`${STORAGE_KEY}-es`);
+      setCvDataEn(cvEnglish);
+      setCvDataEs(cvSpanish);
+      console.log("Reset all CV data to original");
+    }
+  };
+
   return (
-    <div className="bg-gray-50 h-dvh">
-      <Menu 
-        language={language}
-        setLanguage={setLanguage}
-        setIsEditorOpen={setIsEditorOpen}
-        handleDownloadJSON={handleDownloadJSON} 
-      />
-      <PDFViewer style={{ width: '100%', height: '100%' }}>
-        <PDFDocument cvData={cvData} lang={language.toUpperCase()} />
-      </PDFViewer>
-      <JsonEditorDialog
-        isOpen={isEditorOpen}
-        onClose={() => setIsEditorOpen(false)}
-        language={language}
-        onLanguageChange={setLanguage}
-        cvData={cvData}
-        onSave={handleSaveCV}
-      />
+    <div className="h-screen flex flex-col bg-gray-900">
+      {/* Top Menu Bar */}
+      <div className="bg-[#3c3c3c] flex items-center justify-between px-4 shrink-0">
+        <div className="flex gap-2 py-1">
+          <button
+            onClick={handleDownloadJSON}
+            className="px-3 py-1 text-sm text-white bg-[#303030] hover:bg-[#4d4d4d] rounded"
+          >
+            💾 Download
+          </button>
+          <button
+            onClick={handleResetAll}
+            className="px-3 py-1 text-sm text-white bg-red-900 hover:bg-red-600 rounded"
+          >
+            🔄 Reset All
+          </button>
+        </div>
+      </div>
+
+      {/* Resizable split layout */}
+      <div 
+        className="flex-1 flex overflow-hidden relative"
+      >
+        {/* JSON Editor - Left Side */}
+        <div 
+          style={{ width: "50%" }}
+          className="border-r border-gray-700"
+        >
+          <JsonEditor
+            language={language}
+            onLanguageChange={setLanguage}
+            cvData={cvData}
+            onSave={handleSaveCV}
+            schema={cvSchema}
+          />
+        </div>
+
+        {/* PDF Viewer - Right Side */}
+        <div 
+          style={{ width: "50%" }}
+          className="bg-gray-800"
+        >
+          <PDFViewer style={{ width: "100%", height: "100%", border: "none" }}>
+            <PDFDocument cvData={cvData} lang={language.toUpperCase()} />
+          </PDFViewer>
+        </div>
+      </div>
     </div>
   );
 }
