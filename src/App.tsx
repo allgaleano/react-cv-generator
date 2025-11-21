@@ -3,7 +3,7 @@ import cvEnglish from "./data/en.json";
 import cvSpanish from "./data/es.json";
 import cvSchema from "./data/schema.json";
 import { PDFViewer } from "@react-pdf/renderer";
-import PDFDocument from "./pdf-document";
+import PDFDocument from "./components/pdf-document";
 import { JsonEditor } from "@/components/json-editor";
 import type { CVData } from "./types";
 
@@ -15,6 +15,7 @@ function App() {
   // State to hold the CV data
   const [cvDataEn, setCvDataEn] = useState<CVData>(cvEnglish);
   const [cvDataEs, setCvDataEs] = useState<CVData>(cvSpanish);
+  const [pdfKey, setPdfKey] = useState(0);
   
   // Load from localStorage on mount
   useEffect(() => {
@@ -45,6 +46,7 @@ function App() {
       setCvDataEs(data);
     }
     console.log(`Saved ${lang} CV:`, data);
+    setPdfKey(k => k + 1);
   };
 
   const handleDownloadJSON = () => {
@@ -68,6 +70,17 @@ function App() {
     }
   };
 
+  const onReset = () => {
+    if (language == "en") {
+      setCvDataEn(cvEnglish);
+    } else {
+      setCvDataEs(cvDataEs);
+    }
+
+    setPdfKey(k => k + 1);
+    console.log(`Reset ${language} CV to original`);
+  }
+
   return (
     <div className="h-screen flex flex-col bg-gray-900">
       {/* Top Menu Bar */}
@@ -86,6 +99,7 @@ function App() {
             🔄 Reset All
           </button>
         </div>
+        <span className="text-white">v2.0.0</span>
       </div>
 
       {/* Resizable split layout */}
@@ -110,6 +124,7 @@ function App() {
             onLanguageChange={setLanguage}
             cvData={cvData}
             onSave={handleSaveCV}
+            onReset={onReset}
             schema={cvSchema}
           />
         </div>
@@ -123,7 +138,7 @@ function App() {
             max-[1200px]:h-1/2      /* half height on mobile */
           "
         >
-          <PDFViewer style={{ width: "100%", height: "100%", border: "none" }}>
+          <PDFViewer key={pdfKey} style={{ width: "100%", height: "100%", border: "none" }}>
             <PDFDocument cvData={cvData} lang={language.toUpperCase()} />
           </PDFViewer>
         </div>

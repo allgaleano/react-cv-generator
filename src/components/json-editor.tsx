@@ -8,6 +8,7 @@ interface JsonEditorProps {
   onLanguageChange: (lang: "en" | "es") => void;
   cvData: CVData;
   onSave: (data: CVData, language: "en" | "es") => void;
+  onReset: () => void;
   schema: object;
 }
 
@@ -18,6 +19,7 @@ export const JsonEditor = ({
   onLanguageChange,
   cvData,
   onSave,
+  onReset,
   schema,
 }: JsonEditorProps) => {
   const [jsonValue, setJsonValue] = useState("");
@@ -128,6 +130,7 @@ export const JsonEditor = ({
       setError(null);
       setIsModified(false);
     }
+    onReset();
   };
 
   return (

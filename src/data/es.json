@@ -1,16 +1,16 @@
 {
   "$schema": "./schema.json",
   "personal": {
-    "name": "Alberto Galeano Díaz",
+    "name": "Persona Ejemplo",
     "contactData": [
-      "galeano.diaz.alberto@gmail.com",
-      "+34 603657082",
-      "Madrid, España"
+      "example@mail.com",
+      "+00 000000000",
+      "Ciudad Ejemplo, País Ejemplo"
     ],
     "urls": [
-      ["linkedin.com/in/alberto-galeano-diaz/", "https://www.linkedin.com/in/alberto-galeano-diaz/"],
-      ["github.com/allgaleano", "https://github.com/allgaleano"],
-      ["albertogaleano.com", "https://albertogaleano.com"]
+      ["example.link/uno", "https://example.link/uno"],
+      ["example.link/dos", "https://example.link/dos"],
+      ["example.link/tres", "https://example.link/tres"]
     ]
   },
   "sections": [
@@ -20,27 +20,27 @@
       "title": "Experiencia",
       "data": [
         {
-          "title": "Accenture",
-          "subtitle": "Ingeniero de Software en Prácticas",
-          "location": "Madrid, España",
-          "startDate": "Feb 2025",
-          "endDate": "May 2025",
+          "title": "Compañía XYZ",
+          "subtitle": "Rol ABC",
+          "location": "Ubicación 123",
+          "startDate": "Ene 2020",
+          "endDate": "Dic 2020",
           "list": [
-            "Aceleré el desarrollo del backend en 5x al entregar rápidamente endpoints RESTful usando Java Spring Boot dentro de plazos ajustados tras la cancelación del proyecto en un entorno Agile/SCRUM.",
-            "Eliminé la deuda técnica y mejoré la calidad del código en un 60% mediante la implementación de prácticas TDD, escribiendo más de 200 pruebas unitarias y resolviendo más de 150 code smells de SonarQube en toda la base de código, manteniendo cero deuda técnica durante todo el ciclo de desarrollo.",
-            "Desarrollé requisitos funcionales complejos estudiando la documentación del proyecto y manteniendo una comunicación clara con los equipos funcionales y clientes, logrando el comportamiento deseado y cumpliendo el 100% de los plazos."
+            "Realizó la tarea A que resultó en la mejora B.",
+            "Colaboró con el equipo C en el proyecto D.",
+            "Desarrolló la funcionalidad E para apoyar el proceso F."
           ]
         },
         {
-          "title": "Motion&Balance",
-          "subtitle": "Desarrollador Full-Stack",
-          "location": "Madrid, España",
-          "startDate": "Oct 2022",
-          "endDate": "Abr 2024",
+          "title": "Organización LMN",
+          "subtitle": "Posición DEF",
+          "location": "Región 456",
+          "startDate": "Feb 2021",
+          "endDate": "Presente",
           "list": [
-            "Reduje el tiempo del ciclo de cumplimiento de pedidos en un 70% al diseñar y desplegar una aplicación CRM personalizada de extremo a extremo y un configurador de productos usando backend en Java Spring Boot y frontend en React, automatizando la generación de presupuestos, procesamiento de pedidos y flujos de trabajo de fabricación para más de 500 transacciones mensuales.",
-            "Reduje los costes de infraestructura en un 40% y mejoré la escalabilidad del sistema al migrar las aplicaciones web y servidores de dominio a la infraestructura en la nube de AWS.",
-            "Aumenté la generación de leads en un 150% al rediseñar la UI/UX del sitio web de la empresa e implementar las mejores prácticas de SEO usando frameworks modernos de JavaScript (React + Vite, Astro, Next.js), mejorando la velocidad de carga de página en un 60% y el posicionamiento en buscadores para más de 20 términos clave."
+            "Implementó el flujo de trabajo X para optimizar la operación Y.",
+            "Apoyó la iniciativa Z en múltiples unidades.",
+            "Creó documentación para el sistema Q."
           ]
         }
       ]
@@ -51,11 +51,12 @@
       "title": "Proyectos",
       "data": [
         {
-          "title": "Aplicación Web MatchPoint",
-          "startDate": "Sep 2024",
-          "endDate": "Dic 2024",
+          "title": "Proyecto Alfa",
+          "startDate": "Jun 2022",
+          "endDate": "Jul 2022",
           "list": [
-            "Automaticé la gestión de torneos de tenis desarrollando una aplicación full-stack con Java Spring Boot y React/Next.js, implementando algoritmos de emparejamiento automático de jugadores y seguimiento de estadísticas en tiempo real para jugadores en múltiples torneos."
+            "Diseñó el componente A para el módulo B.",
+            "Integró la funcionalidad C en la plataforma D."
           ]
         }
       ]
@@ -66,13 +67,13 @@
       "title": "Educación",
       "data": [
         {
-          "title": "Grado en Ingeniería Informática",
-          "subtitle": "Universidad Politécnica de Madrid",
-          "location": "Madrid",
-          "startDate": "Sep 2021",
-          "endDate": "Jun 2025",
+          "title": "Título de Grado Placeholder",
+          "subtitle": "Universidad Placeholder",
+          "location": "Ciudad Placeholder",
+          "startDate": "Sep 2018",
+          "endDate": "Jun 2022",
           "list": [
-            "Graduado con matrícula de honor en mi proyecto final de grado."
+            "Completó cursos en la Asignatura X y la Asignatura Y."
           ]
         }
       ]
@@ -85,47 +86,11 @@
         {
           "title": "",
           "list": [
-            "Java",
-            "Spring",
-            "Spring Boot",
-            "JUnit",
-            "Mockito",
-            "Maven",
-            "Tomcat",
-            "Hibernate",
-            "PostgreSQL",
-            "MySQL",
-            "Oracle SQL",
-            "Redis",
-            "MongoDB",
-            "SQL",
-            "NoSQL",
-            "Microservicios",
-            "APIs REST",
-            "AWS",
-            "Cloud",
-            "Linux",
-            "Docker",
-            "CI/CD",
-            "Jenkins",
-            "Jira",
-            "Git",
-            "GitLab",
-            "GitHub",
-            "Bitbucket",
-            "JavaScript",
-            "TypeScript",
-            "React",
-            "Next.js",
-            "Vite",
-            "Astro",
-            "Node.js",
-            "TanStack",
-            "HTML/CSS",
-            "TDD",
-            "DDD",
-            "Metodologías Ágiles",
-            "SCRUM"
+            "Habilidad A",
+            "Habilidad B",
+            "Habilidad C",
+            "Habilidad D",
+            "Habilidad E"
           ]
         }
       ]

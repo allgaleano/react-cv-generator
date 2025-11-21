@@ -27,30 +27,18 @@ Font.register({
   ]
 });
 
-const tildeMap: Record<string, string> = {
-  'ñ': 'n',
-  'á': 'a', 
-  'é': 'e', 
-  'í': 'i', 
-  'ó': 'o', 
-  'ú': 'u', 
-  'ü': 'u', 
-};
-
-
 const PDFDocument = ({ cvData, lang }: { cvData: CVData, lang: string }) => (
   <Document
     title={
       `${cvData.personal.name
-        .replace(/[ñÑáÁéÉíÍóÓúÚüÜ]/g, (match: string): string => tildeMap[match])
         .toUpperCase()
         .split(" ")
         .join("_")}_${lang}_CV`
     }
-    author={cvData.personal.name}
-    subject={`Resume/CV for ${cvData.personal.name}`}
+    author={cvData.personal.name || ""}
+    subject={`Resume/CV for ${cvData.personal.name || ""}`}
     keywords="resume, cv, software engineer, developer"
-    creator={cvData.personal.name}
+    creator={cvData.personal.name || ""}
     producer="albertogaleano.com"
   >
     <Page size="A4" style={styles.page}>

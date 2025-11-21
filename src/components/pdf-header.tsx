@@ -18,7 +18,7 @@ const PDFHeader = ({ personal }: HeaderProps) => (
       {personal.urls.map(([text, url], i) => (
         <View key={i} style={styles.contactInfo}>
           <Link src={url} style={styles.link}>
-            <Text style={styles.contactItem}>{text}</Text>
+            {text}
           </Link>
           <Text style={styles.separator}>|</Text>
         </View>

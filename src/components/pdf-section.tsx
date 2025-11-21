@@ -1,29 +1,11 @@
 import { Text, View } from "@react-pdf/renderer";
-import type { Section, SectionItem } from "@/types";
+import type { Section } from "@/types";
 import { styles } from "@/styles";
 
 interface SectionProps {
   section: Section;
 }
 const PDFSection = ({ section }: SectionProps) => {
-  const contentRenderers = {
-    bullets: (item: SectionItem) => (
-      <View style={styles.bulletList}>
-        {item.list?.map((bullet, i) => (
-          <View key={i} style={styles.bullet}>
-            <Text style={styles.bulletPoint}>•</Text>
-            <Text style={styles.bulletText}>{bullet}</Text>
-          </View>
-        ))}
-      </View>
-    ),
-    text: (item: SectionItem) => (
-      <Text style={styles.paragraph}>{item.text}</Text>
-    ),
-    joinedList: (item: SectionItem) => (
-      <Text style={styles.paragraph}>{item.list?.join(", ")}</Text>
-    ),
-  };
   return (
     <View style={styles.section}>
       <Text style={styles.sectionTitle}>{section.title}</Text>
@@ -49,7 +31,22 @@ const PDFSection = ({ section }: SectionProps) => {
               </View>
             )}
           </View>
-          {contentRenderers[section.type]?.(item)}
+          {section.type == "bullets" && (
+            <View style={styles.bulletList}>
+              {item.list?.map((bullet, i) => (
+                <View key={i} style={styles.bullet}>
+                  <Text style={styles.bulletPoint}>•</Text>
+                  <Text style={styles.bulletText}>{bullet}</Text>
+                </View>
+              ))}
+            </View>
+          )} 
+          {section.type == "text" && (
+            <Text style={styles.paragraph}>{item.text}</Text>
+          )}
+          {section.type == "joinedList" && (
+            <Text style={styles.paragraph}>{item.list?.join(", ")}</Text>
+          )}
         </View>
       ))}
     </View>
