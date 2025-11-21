@@ -90,12 +90,20 @@ function App() {
 
       {/* Resizable split layout */}
       <div 
-        className="flex-1 flex overflow-hidden relative"
+        className="
+          flex-1 flex overflow-hidden
+          flex-row                     /* default: side-by-side */
+          max-[1200px]:flex-col-reverse /* <600px: PDF on top, editor on bottom */
+        "
       >
         {/* JSON Editor - Left Side */}
         <div 
-          style={{ width: "50%" }}
-          className="border-r border-gray-700"
+          className="
+            border-r border-gray-700
+            w-[50%]                /* desktop width */
+            max-[1200px]:w-full     /* full width on mobile */
+            max-[1200px]:h-1/2      /* half height on mobile */
+          "
         >
           <JsonEditor
             language={language}
@@ -108,8 +116,12 @@ function App() {
 
         {/* PDF Viewer - Right Side */}
         <div 
-          style={{ width: "50%" }}
-          className="bg-gray-800"
+          className="
+            bg-gray-800
+            w-[50%]                /* desktop width */
+            max-[1200px]:w-full     /* full width on mobile */
+            max-[1200px]:h-1/2      /* half height on mobile */
+          "
         >
           <PDFViewer style={{ width: "100%", height: "100%", border: "none" }}>
             <PDFDocument cvData={cvData} lang={language.toUpperCase()} />
