@@ -1,33 +1,30 @@
 # CV Generator
 
-A modern, ATS-friendly CV/Resume generator built with React and @react-pdf/renderer. Create professional resumes with real-time PDF preview and multi-language support.
+A modern, professional CV/Resume generator with **live JSON editing**, real-time PDF preview, and multi-language support. Built with React, TypeScript, and Monaco Editor for a VS Code-like editing experience.
 
 ## Features
 
-- **Real-time PDF Preview** - See your CV update instantly as you edit
-- **Multi-language Support** - Switch between English and Spanish versions
+### Core Features
+- **Live JSON Editor** - Monaco Editor (VS Code) with syntax highlighting and validation
+- **Real-time PDF Preview** - See changes instantly as you edit
+- **Schema Validation** - JSON Schema ensures data integrity with autocomplete and error detection
+- **Multi-language Support** - English and Spanish with easy language switching
+- **Auto-save** - Changes persist in localStorage across sessions
+
+### Technical Features
 - **ATS-Optimized** - Designed for maximum compatibility with Applicant Tracking Systems
 - **Custom Fonts** - Uses Open Sans for a modern, professional look
 - **PDF Metadata** - Includes proper metadata for better discoverability
-- **Clean Structure** - Simple, single-column layout that ATS systems can parse easily
-- **Downloadable** - Export your CV as a high-quality PDF
+- **Type Safety** - Full TypeScript support with strict validation
+- **Schema-driven** - JSON Schema ensures data consistency
+- **Clean Architecture** - Well-organized, maintainable codebase
 
-## Tech Stack
-
-- **React** - UI framework
-- **TypeScript** - Type safety
-- **@react-pdf/renderer** - PDF generation
-- **Tailwind CSS** - Styling
-- **Vite** - Build tool (assumed)
-
-## Installation
+## Quick Start
 
 ```bash
 # Clone the repository
 git clone <your-repo-url>
-
-# Navigate to project directory
-cd cv-generator
+cd react-cv-generator
 
 # Install dependencies
 npm install
@@ -36,107 +33,184 @@ npm install
 npm run dev
 ```
 
-## Project Structure
+Open your browser and start editing! Changes save automatically.
+
+## 💻 Tech Stack
+
+- **React** - UI framework
+- **TypeScript** - Type safety
+- **@react-pdf/renderer** - PDF generation
+- **@monaco-editor/react** - Code editor (VS Code engine)
+- **JSON Schema** - Data validation
+- **Tailwind CSS** - Styling
+- **Vite** - Build tool
+
+## 📁 Project Structure
 
 ```
+cv-generator/
 ├── src/
 │   ├── data/
-│   │   ├── cv-en.json       # English CV data
-│   │   └── cv-es.json       # Spanish CV data
+│   │   ├── en.json         # English CV data
+│   │   ├── es.json         # Spanish CV data
+│   │   └── schema.json     # JSON Schema for validation
+│   │
 │   ├── components/
-│   │   ├── App.tsx          # Main application component
-│   │   ├── menu.tsx         # Language selector and download options
-│   │   ├── section.tsx      # Reusable section component
-│   │   ├── bullet-list.tsx  # Bullet point list component
-│   │   └── pdf-document.tsx # PDF generation component
-│   └── types.ts             # TypeScript type definitions
+│   │   ├── json-editor-panel.tsx   # Monaco editor panel
+│   │   ├── menu.tsx                # Language selector
+│   │   ├── pdf-document.tsx        # PDF generation
+│   │   ├── pdf-header.tsx          # PDF header component
+│   │   └── pdf-section.tsx         # PDF section component
+│   │
+│   ├── types/
+│   │   └── index.ts           # TypeScript interfaces
+│   │
+│   ├── App.tsx                # Main app with split layout
+│   └── main.tsx               # Entry point
+│
 ├── public/
 │   └── fonts/
 │       ├── OpenSans-Regular.ttf
 │       ├── OpenSans-Italic.ttf
 │       └── OpenSans-SemiBold.ttf
+│
 └── package.json
 ```
 
 ## CV Data Structure
 
-The CV data is stored in JSON format with the following structure:
+The CV follows a schema-validated JSON structure:
 
 ```json
 {
+  "$schema": "./schema.json",
   "personal": {
     "name": "Your Name",
-    "email": "email@example.com",
-    "phone": "+1234567890",
-    "linkedin": "linkedin.com/in/yourprofile",
-    "linkedinURL": "https://linkedin.com/in/yourprofile",
-    "github": "github.com/yourusername",
-    "githubURL": "https://github.com/yourusername",
-    "website": "yourwebsite.com",
-    "websiteURL": "https://yourwebsite.com"
-  },
-  "experience": {
-    "title": "Professional Experience",
-    "items": [
-      {
-        "company": "Company Name",
-        "position": "Job Title",
-        "location": "City, Country",
-        "startDate": "MM/YYYY",
-        "endDate": "MM/YYYY",
-        "bullets": [
-          "Achievement or responsibility 1",
-          "Achievement or responsibility 2"
-        ]
-      }
+    "contactData": [
+      "email@example.com",
+      "+1234567890",
+      "City, Country"
+    ],
+    "urls": [
+      ["linkedin.com/in/profile", "https://linkedin.com/in/profile"],
+      ["github.com/username", "https://github.com/username"],
+      ["yourwebsite.com", "https://yourwebsite.com"]
     ]
   },
-  "projects": {
-    "title": "Projects",
-    "items": [
-      {
-        "name": "Project Name",
-        "startDate": "MM/YYYY",
-        "endDate": "MM/YYYY",
-        "bullets": [
-          "Project description and achievements"
-        ]
-      }
-    ]
-  },
-  "education": {
-    "title": "Education",
-    "items": [
-      {
-        "degree": "Degree Name",
-        "institution": "University Name",
-        "startDate": "MM/YYYY",
-        "endDate": "MM/YYYY",
-        "bullets": [
-          "Relevant coursework or achievements"
-        ]
-      }
-    ]
-  },
-  "skills": {
-    "title": "Technical Skills",
-    "items": [
-      "Skill 1",
-      "Skill 2",
-      "Skill 3"
-    ]
-  }
+  "sections": [
+    {
+      "id": "experience",
+      "type": "bullets",
+      "title": "Experience",
+      "data": [
+        {
+          "title": "Company Name",
+          "subtitle": "Job Title",
+          "location": "City, Country",
+          "startDate": "Feb 2025",
+          "endDate": "May 2025",
+          "list": [
+            "Achievement 1 with metrics",
+            "Achievement 2 with impact"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "education",
+      "type": "bullets",
+      "title": "Education",
+      "data": [
+        {
+          "title": "Degree Name",
+          "subtitle": "University Name",
+          "location": "City",
+          "startDate": "Sep 2021",
+          "endDate": "Jun 2025",
+          "list": ["Notable achievement"]
+        }
+      ]
+    },
+    {
+      "id": "skills",
+      "type": "joinedList",
+      "title": "Skills",
+      "data": [
+        {
+          "title": "",
+          "list": ["Skill 1", "Skill 2", "Skill 3"]
+        }
+      ]
+    }
+  ]
 }
 ```
 
-## Customization
+### Section Types
 
-### Adding Custom Fonts
+- **`bullets`** - For experience, education, projects with bullet points
+- **`text`** - For paragraph-style content
+- **`joinedList`** - For comma-separated lists (skills)
 
-1. Place your `.ttf` font files in `public/fonts/`
-2. Register them in `pdf-document.tsx`:
+## 🎯 Usage Guide
 
-```typescript
+### Editing Your CV
+
+1. **Switch Language** - Click EN or ES buttons to switch languages
+2. **Edit JSON** - Use the Monaco editor on the left with full autocomplete
+3. **See Preview** - PDF updates instantly on the right
+4. **Save** - Click "Save" button (or press Ctrl+S)
+5. **Download** - Click "💾 Download" to export as PDF
+
+### Editor Features
+
+- **Autocomplete** - Press `Ctrl+Space` for suggestions
+- **Validation** - Errors highlighted in real-time
+- **Format** - Click "Format" button or press `Shift+Alt+F`
+- **Status** - See validation state in status bar
+- **Reset** - Restore original data if needed
+
+### Keyboard Shortcuts
+
+| Shortcut | Action |
+|----------|--------|
+| `Ctrl+S` | Save changes |
+| `Shift+Alt+F` | Format JSON |
+| `Ctrl+Space` | Autocomplete |
+| `Ctrl+F` | Find |
+| `Ctrl+H` | Find and replace |
+| `F1` | Command palette |
+
+### Resizing the Layout
+
+- Hover over the divider between editor and PDF
+- Click and drag to adjust width (30-70%)
+- Your preference is saved automatically
+
+## 🔧 Customization
+
+### Adding New Languages
+
+1. Create a new JSON file (e.g., `fr.json`):
+```bash
+cp src/data/en.json src/data/fr.json
+```
+
+2. Update `App.tsx`:
+```tsx
+import cvFrench from "./data/fr.json";
+
+const [cvDataFr, setCvDataFr] = useState(cvFrench);
+
+// Add to language selector
+```
+
+### Custom Fonts
+
+1. Add font files to `public/fonts/`
+2. Register in `pdf-document.tsx`:
+
+```tsx
 Font.register({
   family: "Your Font",
   fonts: [
@@ -146,65 +220,181 @@ Font.register({
 });
 ```
 
-3. Update the `fontFamily` in styles:
-
-```typescript
+3. Update styles:
+```tsx
 const styles = StyleSheet.create({
   page: {
     fontFamily: "Your Font",
-    // ... other styles
   }
 });
 ```
 
-### Modifying PDF Layout
+### PDF Layout
 
-Edit `pdf-document.tsx` to adjust:
-- Font sizes
-- Spacing and margins
-- Section order
+Edit styling in `pdf-document.tsx`:
+- Font sizes and spacing
 - Colors and borders
+- Section order
+- Page margins
 
-### Adding More Languages
+### Schema Customization
 
-1. Create a new JSON file in `src/data/` (e.g., `cv-fr.json`)
-2. Update the language selector in `menu.tsx`
-3. Add the import in `App.tsx`
+Modify `cv-schema.json` to:
+- Add new fields
+- Change validation rules
+- Add new section types
+- Customize descriptions
 
-## ATS Optimization Tips
+## Schema Validation
+
+The JSON Schema provides:
+- **Required field validation**
+- **Type checking** (strings, arrays, objects)
+- **Enum validation** (e.g., section types)
+- **Pattern matching**
+- **Min/max constraints**
+
+### Example Validation Errors
+
+```json
+// Missing required field
+{
+  "personal": {
+    "name": "Test"
+    // ❌ Error: Missing 'contactData'
+  }
+}
+
+// Invalid section type
+{
+  "sections": [{
+    "type": "invalid"  // ❌ Must be: bullets, text, or joinedList
+  }]
+}
+```
+
+## 💾 Data Persistence
+
+### LocalStorage
+
+Your CV data is automatically saved to localStorage:
+- **Key pattern**: `cv-data-{language}`
+- **Storage**: `cv-data-en`, `cv-data-es`
+- **Auto-save**: On every save
+- **Auto-load**: On app start
+
+### Reset Options
+
+- **Reset Current** - Click "Reset to Original" in editor
+- **Reset All** - Click "🔄 Reset All" in menu bar
+
+### Download Backup
+
+Click "💾 Download" to export your CV as JSON:
+- Useful for backups
+- Share across devices
+- Version control
+
+## 🎨 ATS Optimization
 
 This CV generator follows ATS best practices:
 
-- Single-column layout
-- Standard section headings
-- Simple, clean formatting
-- No images or graphics
-- Standard fonts (Open Sans/Helvetica)
-- Real, selectable text (not images)
-- Proper use of bullet points
-- Clear date formats
+### Layout
+- ✅ Single-column layout
+- ✅ Standard section headings
+- ✅ Simple, clean formatting
+- ✅ No tables or complex layouts
 
-## PDF Metadata
+### Content
+- ✅ Real, selectable text (not images)
+- ✅ Standard fonts (Open Sans)
+- ✅ Clear date formats
+- ✅ Proper use of bullet points
 
-The generated PDF includes metadata for better organization:
-- Title
-- Author
-- Subject
-- Keywords
-- Creator
-- Producer
+### Technical
+- ✅ Proper PDF structure
+- ✅ Embedded fonts
+- ✅ Metadata included
+- ✅ No form fields or scripts
 
-This helps with document management systems and search indexing.
+## 📄 PDF Metadata
 
-## Building for Production
+Generated PDFs include:
+- **Title** - `{NAME}_CV`
+- **Author** - Your name
+- **Subject** - Resume/CV description
+- **Keywords** - "resume, cv, software engineer, developer"
+- **Creator** - Your name
+- **Producer** - Your website
+
+This helps with document management and search indexing.
+
+## 🏗️ Building for Production
 
 ```bash
+# Build optimized bundle
 npm run build
+
+# Preview production build
+npm run preview
 ```
 
-The build artifacts will be stored in the `dist/` directory.
+Build artifacts are in `dist/` directory.
+
+## Advanced Features
+
+### Add Validation Script
+
+```bash
+# Install Ajv
+npm install ajv ajv-formats
+
+# Run validator
+node validate-cv.js cv-en.json
+```
+
+### Backend Integration
+
+```tsx
+const handleSaveCV = async (data, lang) => {
+  await fetch(`/api/cv/${lang}`, {
+    method: "PUT",
+    body: JSON.stringify(data),
+  });
+  setCvData(data);
+};
+```
+
+### Version Control
+
+```tsx
+const dataWithVersion = {
+  version: "1.0",
+  data: cvData,
+  savedAt: new Date().toISOString()
+};
+localStorage.setItem(key, JSON.stringify(dataWithVersion));
+```
+
+## Resources
+
+- [Monaco Editor API](https://microsoft.github.io/monaco-editor/api/index.html)
+- [@react-pdf/renderer Docs](https://react-pdf.org/)
+- [JSON Schema Guide](https://json-schema.org/understanding-json-schema/)
+- [ATS Optimization Tips](https://www.jobscan.co/blog/ats-resume/)
+
+## Contributing
+
+Contributions are welcome! Please:
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
 
 ## Acknowledgments
 
-- [@react-pdf/renderer](https://react-pdf.org/) - PDF generation library
-- [Open Sans](https://fonts.google.com/specimen/Open+Sans) - Font by Steve Matteson
+- **[@react-pdf/renderer](https://react-pdf.org/)** - PDF generation
+- **[Monaco Editor](https://microsoft.github.io/monaco-editor/)** - Code editor
+- **[Open Sans](https://fonts.google.com/specimen/Open+Sans)** - Font by Steve Matteson
+- **[JSON Schema](https://json-schema.org/)** - Data validation standard
