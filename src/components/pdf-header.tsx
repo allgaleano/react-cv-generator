@@ -20,7 +20,9 @@ const PDFHeader = ({ personal }: HeaderProps) => (
           <Link src={url} style={styles.link}>
             {text}
           </Link>
-          <Text style={styles.separator}>|</Text>
+          {i != personal.urls.length - 1 && (
+            <Text style={styles.separator}>|</Text>
+          )}
         </View>
       ))}
     </View>
