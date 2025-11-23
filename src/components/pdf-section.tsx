@@ -10,7 +10,7 @@ const PDFSection = ({ section }: SectionProps) => {
     <View style={styles.section}>
       <Text style={styles.sectionTitle}>{section.title}</Text>
       {section.data.map((item, i) => (
-        <View key={i} style={styles.item} wrap={false}>
+        <View key={`${section.title}-${item.title}-${i}`} style={styles.item} wrap={false}>
           <View style={styles.itemHeader}>
             <View style={styles.leftColumn}>
               <Text style={styles.itemTitle}>{item.title}</Text>

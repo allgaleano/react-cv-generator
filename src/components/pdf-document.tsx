@@ -44,7 +44,7 @@ const PDFDocument = ({ cvData, lang }: { cvData: CVData, lang: string }) => (
     <Page size="A4" style={styles.page}>
       <PDFHeader personal={cvData.personal}/>
       {cvData.sections.map((section, i) => (
-        <PDFSection key={i} section={section}/>
+        <PDFSection key={`section-${section.title}-${i}`} section={section}/>
       ))}
     </Page>
   </Document>
