@@ -74,7 +74,7 @@ function App() {
     if (language == "en") {
       setCvDataEn(cvEnglish);
     } else {
-      setCvDataEs(cvDataEs);
+      setCvDataEs(cvSpanish);
     }
 
     setPdfKey(k => k + 1);
@@ -99,7 +99,7 @@ function App() {
             🔄 Reset All
           </button>
         </div>
-        <span className="text-white">v2.0.1</span>
+        <span className="text-white">v2.0.2</span>
       </div>
 
       {/* Resizable split layout */}
@@ -134,11 +134,11 @@ function App() {
           className="
             bg-gray-800
             w-[50%]                /* desktop width */
-            max-[1200px]:w-full     /* full width on mobile */
+            max-[1200px]:w-full     /* full width on mobile */ 
             max-[1200px]:h-1/2      /* half height on mobile */
           "
         >
-          <PDFViewer key={pdfKey} style={{ width: "100%", height: "100%", border: "none" }}>
+          <PDFViewer key={`${pdfKey}-${language}`} style={{ width: "100%", height: "100%", border: "none" }}>
             <PDFDocument cvData={cvData} lang={language.toUpperCase()} />
           </PDFViewer>
         </div>
