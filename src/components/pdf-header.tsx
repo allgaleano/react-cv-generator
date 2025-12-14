@@ -17,6 +17,9 @@ const PDFHeader = ({ personal }: HeaderProps) => (
           )}
         </View>
       ))}
+      {personal.urls.length > 0 &&
+        <Text style={styles.separator}>|</Text>
+      }
       {personal.urls.map(([text, url], i) => (
         <View key={`url-${url}-${i}`} style={styles.contactInfo}>
           <Link src={url} style={styles.link}>

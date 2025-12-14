@@ -99,7 +99,7 @@ function App() {
             🔄 Reset All
           </button>
         </div>
-        <span className="text-white">v2.0.2</span>
+        <span className="text-white">v2.0.3</span>
       </div>
 
       {/* Resizable split layout */}
